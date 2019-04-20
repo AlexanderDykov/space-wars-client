@@ -12,14 +12,13 @@ namespace Game.ECS.Systems.Movement
     public class MoveSystem : JobComponentSystem
     {
         [BurstCompile]
-        private struct MoveJob : IJobForEach<InputData, Translation, PlayerData>
+        private struct MoveJob : IJobForEach<InputData, Translation, PlayerData, Speed>
         {
-            public float dt;
-            public float speed;
+            public float Dt;
 
-            public void Execute([ReadOnly] ref InputData input, ref Translation translation, [ReadOnly] ref PlayerData c2)
+            public void Execute([ReadOnly] ref InputData input, ref Translation translation, [ReadOnly] ref PlayerData c2, [ReadOnly] ref Speed speed)
             {
-                translation.Value = translation.Value + new float3(input.horizontal, input.vertical, 0) * dt * speed;
+                translation.Value = translation.Value + new float3(input.horizontal, input.vertical, 0) * Dt * speed.value;
             }
         }
         
@@ -27,8 +26,7 @@ namespace Game.ECS.Systems.Movement
         {
             var moveJob = new MoveJob
             {
-                dt = Time.deltaTime,
-                speed = 3
+                Dt = Time.deltaTime,
             };
             return moveJob.Schedule(this, inputDeps);
         }

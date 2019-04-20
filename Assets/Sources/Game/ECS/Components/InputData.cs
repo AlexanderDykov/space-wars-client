@@ -1,6 +1,5 @@
 ﻿using System;
 using Unity.Entities;
-using UnityEngine.Serialization;
 
 namespace Game.ECS.Components
 {
