@@ -6,11 +6,11 @@ using UnityEngine;
 
 namespace Game.ECS.Systems.Spawn
 {
-    public sealed class SpawnSystem: ComponentSystem
+    public sealed class SpawnSystem : ComponentSystem
     {
         private EntityQuery _group;
         //TODO: load from some config
-        public float Speed = 3f;
+        public float Speed = 1.5f;
         
         protected override void OnCreateManager()
         {
