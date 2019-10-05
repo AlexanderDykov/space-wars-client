@@ -2,9 +2,8 @@ using Game.ECS.Components;
 using Unity.Burst;
 using Unity.Entities;
 using Unity.Jobs;
-using UnityEngine;
 
-namespace Game.ECS.Systems
+namespace Game.ECS.Systems.Input
 {
     public sealed class DesktopInputSystem : JobComponentSystem
     {
@@ -25,8 +24,8 @@ namespace Game.ECS.Systems
         {
             var iJob = new InputJob()
             {
-                Vertical = Input.GetAxis("Vertical"),
-                Horizontal = Input.GetAxis("Horizontal")
+                Vertical = UnityEngine.Input.GetAxis("Vertical"),
+                Horizontal = UnityEngine.Input.GetAxis("Horizontal")
             };
             return iJob.Schedule(this, inputDeps);
         }

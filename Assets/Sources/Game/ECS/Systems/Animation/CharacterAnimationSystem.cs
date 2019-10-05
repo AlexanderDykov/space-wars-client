@@ -11,9 +11,9 @@ namespace Game.ECS.Systems.Animation
         private readonly int _horizontal = Animator.StringToHash("Horizontal");
         private readonly int _vertical = Animator.StringToHash("Vertical");
         
-        protected override void OnCreateManager()
+        protected override void OnCreate()
         {
-            base.OnCreateManager();
+            base.OnCreate();
             _group = GetEntityQuery(typeof(Animator), ComponentType.ReadWrite<InputData>(), ComponentType.ReadWrite<PlayerData>());
         }
         
