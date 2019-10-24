@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "com.modesttree.zenject": "https://github.com/AlexanderDykov/Zenject.git#upm",
     "com.unity.2d.sprite": "1.0.0",
     "com.unity.2d.tilemap": "1.0.0",
     "com.unity.entities": "0.1.1-preview",
@@ -41,5 +42,11 @@
     "com.unity.modules.vr": "1.0.0",
     "com.unity.modules.wind": "1.0.0",
     "com.unity.modules.xr": "1.0.0"
+  },
+  "lock": {
+    "com.modesttree.zenject": {
+      "hash": "3d5afc97b98bc30ea065f24b69ccacb679ceb356",
+      "revision": "upm"
+    }
   }
 }
