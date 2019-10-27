@@ -1,0 +1,89 @@
+sudo: required
+language: bash
+env:
+  global:
+  - IMAGE_NAME=gableroux/unity3d:2019.1.14f1
+  - BUILD_NAME=ExampleProjectName
+  - BRANCH=master
+  - secure: R65HfbpE33qULFggFadYyA4mdEkm6ZxsOS8VpabJ0i2VzN3wGSg2wGtJC/Ai+STLxq2BIUO4pi+GotuGXRfoDZMXzGdNh/Rna7cmQ4td3bQAeHqJ3stfRcQCIw79wTo1WzaRTnGh6/EuyWXgDbTHM29iWLVrjM2mWiInh82LIT9w7rXGLlsc0Aj5o5C54bgItAXOiCCQ3wWQJWT1ockNBb+htrl0HrJ/lnMyPW84M3/3Xp8Jn8ApcO6zEytAbJ5tdQBAlVbFofwYd4QHA39jt8nkZ9hnF74EB+LGtySOJP/ILiDA72BTPuIY/c+TePN50m8GCM5OBFymBsIFB1bhbKCIJKCtOaVqP8cygjjvrbX4YfTp6tD1trYhVIRL2uZDc9Q1yKzOiv3kJr3DEu8IAJtEf/6vAMJ6e4vkGmBsrgAUiW+jGVv3mV01vI9stqmQvT8W35zznTL2pnNT/+kiIbrjDOjE7dKeBilxNmq+Rik2wCKoxhazc3O89+5LO2XYAztPc8EuTG1PfXHbREKk6Ipnzc2C+pBNSCMVANdRpq/yMvlO5ujJGmhato2Bzru/bKNKJKibp08btBOdThVFkde7RQtWpHoM5Bduoz+ScTyQj96HUFpVO8vhUXOU8/+Yk4m4gXUN7ZlUmUUCWo+pPtvPDbfYq6L6T5fvM6XfPd4=
+services:
+- docker
+before_install:
+- openssl aes-256-cbc -K $encrypted_6ee16c547602_key -iv $encrypted_6ee16c547602_iv
+  -in Unity_v2019.x.ulf.enc -out ./Unity_v2019.x.ulf -d
+- export UNITY_LICENSE_CONTENT=`cat Unity_v2019.x.ulf`
+- rm Unity_v2019.x.ulf
+- docker pull $IMAGE_NAME
+before_script:
+- sudo apt-get -y update
+notifications:
+  email:
+    on_success: never
+    on_failure: always
+jobs:
+  include:
+  - stage: test
+    script: chmod +x ./ci/docker_test.sh && ./ci/docker_test.sh
+    env: TEST_PLATFORM=editmode
+    addons:
+      artifacts:
+        target_paths:
+        - "$(pwd)/$TEST_PLATFORM-results.xml"
+  - stage: test
+    script: chmod +x ./ci/docker_test.sh && ./ci/docker_test.sh
+    env: TEST_PLATFORM=playmode
+    addons:
+      artifacts:
+        target_paths:
+        - "$(pwd)/$TEST_PLATFORM-results.xml"
+  - stage: build
+    env: BUILD_TARGET=StandaloneLinux64
+    script: chmod +x ./ci/docker_build.sh && ./ci/docker_build.sh
+    deploy:
+    - provider: releases
+      api_key: "$GITHUB_TOKEN"
+      overwrite: true
+      file:
+      - StandaloneLinux64.tar.gz
+      skip_cleanup: true
+      on:
+        tags: true
+        branch: "$BRANCH"
+  - stage: build
+    env: BUILD_TARGET=StandaloneOSX
+    script: chmod +x ./ci/docker_build.sh && ./ci/docker_build.sh
+    deploy:
+    - provider: releases
+      api_key: "$GITHUB_TOKEN"
+      overwrite: true
+      file:
+      - StandaloneOSX.tar.gz
+      skip_cleanup: true
+      on:
+        tags: true
+        branch: "$BRANCH"
+  - stage: build
+    env: BUILD_TARGET=StandaloneWindows64
+    script: chmod +x ./ci/docker_build.sh &&./ci/docker_build.sh
+    deploy:
+    - provider: releases
+      api_key: "$GITHUB_TOKEN"
+      overwrite: true
+      file:
+      - StandaloneWindows64.tar.gz
+      skip_cleanup: true
+      on:
+        tags: true
+        branch: "$BRANCH"
+  - stage: deploy
+    env: BUILD_TARGET=WebGL
+    script: chmod +x ./ci/docker_build.sh && ./ci/docker_build.sh
+    deploy:
+    - provider: pages
+      skip_cleanup: true
+      github_token: "$GITHUB_TOKEN"
+      keep_history: true
+      local-dir: "./Builds/WebGL/$BUILD_NAME/"
+      on:
+        tags: true
+        branch: "$BRANCH"
