@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 echo ${INPUT_CYPHER} >> $(pwd)/Unity_v2019.x.ulf
-/opt/Unity/Editor/Unity -manualLicenseFile $(pwd)/Unity_v2019.x.ulf -batchmode -nographics -quit
+cp -p $(pwd)/Unity_v2019.x.ulf /
+/opt/Unity/Editor/Unity -manualLicenseFile Unity_v2019.x.ulf -batchmode -nographics -quit
 
 export TEST_PLATFORM=${INPUT_MODE}
 
