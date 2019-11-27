@@ -6,7 +6,7 @@ on:
       - feature/github-ci
 
 jobs:
-  build_WebGL:
+  test-playmode:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v1
