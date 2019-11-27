@@ -1,0 +1,16 @@
+name: CI
+
+on:
+  push:
+    branches:    
+      - feature/github-ci
+
+jobs:
+  build_WebGL:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - uses: ./.github/actions/test
+      with:
+        cypher: ${{ secrets.LICENSE_SECRET }}
+        mode: playmode
