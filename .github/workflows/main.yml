@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v1
-    - uses: AlexanderDykov/unity-test-action@unity3d_2019.2.5f1
+    - uses: AlexanderDykov/unity-test-action@2019.2.5f1
       with:
         license: ${{ secrets.UNITY_LICENSE_CONTENT }}
         mode: playmode
