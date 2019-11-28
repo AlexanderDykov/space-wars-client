@@ -9,12 +9,10 @@ inputs:
     description: 'Test mode'
     required: true
     default: 'playmode'
-  version:
-    description: 'Unity version'
+  image:
+    description: 'Unity image'
     required: true
-    default: '2019.1.14f1'
+    default: 'gableroux/unity3d:2019.1.14f1'
 runs:
   using: 'docker'
   image: 'Dockerfile'
-  args: 
-    - 'IMAGE=gableroux/unity3d:${{ inputs.version }}'
