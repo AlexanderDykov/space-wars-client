@@ -12,5 +12,6 @@ jobs:
     - uses: actions/checkout@v1
     - uses: ./.github/actions/test
       with:
-        cypher: ${{ secrets.LICENSE_SECRET }}
+        license: ${{ secrets.UNITY_LICENSE_CONTENT }}
         mode: playmode
+        version: 2019.1.14f1

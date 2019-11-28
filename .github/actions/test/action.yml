@@ -2,13 +2,17 @@
 name: 'Build'
 description: 'Build'
 inputs:
-  cypher:
-    description: 'Cypher for license'
+  license:
+    description: 'Unity ulf-file'
     required: true
   mode:
     description: 'Test mode'
     required: true
     default: 'playmode'
+  version:
+    description: 'Unity version'
+    required: true
+    default: '2019.1.14f1'
 runs:
   using: 'docker'
   image: 'Dockerfile'
