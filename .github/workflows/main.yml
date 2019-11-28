@@ -10,8 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v1
-    - uses: ./.github/actions/test
+    - uses: AlexanderDykov/unity-test-action@unity3d_2019.1.14f1
       with:
         license: ${{ secrets.UNITY_LICENSE_CONTENT }}
         mode: playmode
-        image: 'gableroux/unity3d:2019.2.5f1'
