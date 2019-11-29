@@ -6,12 +6,20 @@ on:
       - feature/github-ci
 
 jobs:
-  test-playmode:
+  build_WebGL:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v1
-    - uses: ./.github/actions/buildProject
+    - uses: AlexanderDykov/unity-build-action@2019.2.12f1
       with:
         license: ${{ secrets.UNITY_LICENSE_CONTENT }}
+        platform: WebGL
         buildName: SpaceWars
-        platform: StandaloneLinux64
+    - run: cp -rf ./Builds/WebGL/SpaceWars/ SpaceWars
+    - name: Deploy
+      uses: JamesIves/github-pages-deploy-action@releases/v2
+      env:
+        ACCESS_TOKEN: ${{ secrets.GITHUB_PAT }}
+        BRANCH: gh-pages
+        FOLDER: ${{ secrets.PROJECT_NAME }}
+        BASE_BRANCH: master
