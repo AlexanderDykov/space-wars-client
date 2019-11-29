@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v1
-    - uses: AlexanderDykov/unity-build-action@2019.2.12f1
+    - uses: ./.github/actions/buildProject
       with:
         license: ${{ secrets.UNITY_LICENSE_CONTENT }}
         platform: WebGL

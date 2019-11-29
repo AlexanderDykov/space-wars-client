@@ -39,3 +39,4 @@ else
 fi
 
 echo "::add-path::$BUILD_PATH"
+ls $BUILD_PATH
