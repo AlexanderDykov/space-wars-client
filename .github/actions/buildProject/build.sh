@@ -8,7 +8,7 @@ set -e
 set -x
 
 mkdir -p $(pwd)/Assets/Editor/
-cp BuildCommand.cs $(pwd)/Assets/Editor/
+cp /BuildCommand.cs $(pwd)/Assets/Editor/
 
 echo "Building for $BUILD_TARGET"
 
