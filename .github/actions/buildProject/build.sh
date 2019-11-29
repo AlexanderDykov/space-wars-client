@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
-openssl aes-256-cbc -d -a -in $(pwd)/Unity_v2019.x.ulf-cipher -out /Unity_v2019.x.ulf -k ${INPUT_CYPHER}
-/opt/Unity/Editor/Unity -manualLicenseFile /Unity_v2019.x.ulf -batchmode -nographics -quit
+echo "${INPUT_LICENSE}" >> Unity_v2019.x.ulf
+/opt/Unity/Editor/Unity -manualLicenseFile Unity_v2019.x.ulf -batchmode -nographics -quit
 
 export BUILD_TARGET=${INPUT_PLATFORM}
 export BUILD_NAME=${INPUT_BUILDNAME}

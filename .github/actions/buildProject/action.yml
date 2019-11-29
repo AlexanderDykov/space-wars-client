@@ -2,9 +2,6 @@
 name: 'Build'
 description: 'Build'
 inputs:
-  cypher:
-    description: 'Cypher for license'
-    required: true
   platform:  # id of input
     description: 'Platform'
     required: true
@@ -13,6 +10,9 @@ inputs:
     description: 'Name of the build'
     required: true
     default: 'ExampleProjectName'
+  license:
+    description: 'Unity ulf-file'
+    required: true
 runs:
   using: 'docker'
   image: 'Dockerfile'
