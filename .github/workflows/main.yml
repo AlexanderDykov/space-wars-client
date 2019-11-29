@@ -14,4 +14,4 @@ jobs:
       with:
         license: ${{ secrets.UNITY_LICENSE_CONTENT }}
         buildName: SpaceWars
-        platform: StandaloneWindows64
+        platform: StandaloneLinux64

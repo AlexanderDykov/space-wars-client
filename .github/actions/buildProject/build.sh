@@ -7,6 +7,9 @@ export BUILD_NAME=${INPUT_BUILDNAME}
 set -e
 set -x
 
+mkdir -p $(pwd)/Assets/Editor/
+cp BuildCommand.cs $(pwd)/Assets/Editor/
+
 echo "Building for $BUILD_TARGET"
 
 export BUILD_PATH=./Builds/$BUILD_TARGET/

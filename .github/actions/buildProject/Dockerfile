@@ -1,5 +1,5 @@
 # Container image that runs your code
-FROM gableroux/unity3d:2019.2.5f1
+FROM gableroux/unity3d:2019.2.12f1
 
 RUN apt-get -y update && apt-get -y install git-core
 
