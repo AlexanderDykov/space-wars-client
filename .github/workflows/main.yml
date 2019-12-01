@@ -23,5 +23,5 @@ jobs:
       env:
         ACCESS_TOKEN: ${{ secrets.GITHUB_PAT }}
         BRANCH: gh-pages
-        FOLDER: ${{ steps.buildStep.outputs.allBuildsPath }}
+        FOLDER: ${{ steps.buildStep.outputs.allBuildsPath }}/WebGL
         BASE_BRANCH: master
