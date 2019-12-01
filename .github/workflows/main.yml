@@ -15,7 +15,6 @@ jobs:
       uses: webbertakken/unity-builder@v0.1
       env:
         UNITY_LICENSE: ${{ secrets.UNITY_LICENSE_CONTENT }}
-        UNITY_PROJECT_PATH: path/to/your/project
         BUILD_NAME: ${{ secrets.PROJECT_NAME }}
         BUILDS_PATH: build
         BUILD_TARGET: WebGL
