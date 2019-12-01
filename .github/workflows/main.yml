@@ -10,16 +10,19 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v1
-    - uses: ./.github/actions/buildProject
-      with:
-        license: ${{ secrets.UNITY_LICENSE_CONTENT }}
-        platform: WebGL
-        buildName: ${{ secrets.PROJECT_NAME }}
-    - run: cp -rf ./Builds/WebGL/${{ secrets.PROJECT_NAME }}/ ${{ secrets.PROJECT_NAME }}
+    - name: Build project
+      id: buildStep
+      uses: webbertakken/unity-builder@v0.1
+      env:
+        UNITY_LICENSE: ${{ secrets.UNITY_LICENSE_CONTENT }}
+        UNITY_PROJECT_PATH: path/to/your/project
+        BUILD_NAME: ${{ secrets.PROJECT_NAME }}
+        BUILDS_PATH: build
+        BUILD_TARGET: WebGL
     - name: Deploy
       uses: JamesIves/github-pages-deploy-action@releases/v2
       env:
         ACCESS_TOKEN: ${{ secrets.GITHUB_PAT }}
         BRANCH: gh-pages
-        FOLDER: ${{ secrets.PROJECT_NAME }}
+        FOLDER: ${{ steps.buildStep.outputs.allBuildsPath }}
         BASE_BRANCH: master
