@@ -14,8 +14,8 @@ jobs:
       with:
         license: ${{ secrets.UNITY_LICENSE_CONTENT }}
         platform: WebGL
-        buildName: SpaceWars
-    - run: cp -rf ./Builds/WebGL/SpaceWars/ SpaceWars
+        buildName: ${{ secrets.PROJECT_NAME }}
+    - run: cp -rf ./Builds/WebGL/${{ secrets.PROJECT_NAME }}/ ${{ secrets.PROJECT_NAME }}
     - name: Deploy
       uses: JamesIves/github-pages-deploy-action@releases/v2
       env:
